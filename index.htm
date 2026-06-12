@@ -112,6 +112,7 @@ body::after{
     overflow:hidden;
     letter-spacing:1px;
     transition: transform .25s ease, box-shadow .25s ease;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .link-btn i, .link-btn img{
@@ -146,12 +147,13 @@ body::after{
     100%{ opacity:1; transform:translateY(0) scale(1); filter:blur(0); }
 }
 
-#links.show .link-btn:nth-child(1){ animation:dropIn .65s cubic-bezier(.34,1.4,.64,1) .05s forwards; }
-#links.show .link-btn:nth-child(2){ animation:dropIn .65s cubic-bezier(.34,1.4,.64,1) .18s forwards; }
-#links.show .link-btn:nth-child(3){ animation:dropIn .65s cubic-bezier(.34,1.4,.64,1) .31s forwards; }
-#links.show .link-btn:nth-child(4){ animation:dropIn .65s cubic-bezier(.34,1.4,.64,1) .44s forwards; }
+#links.show .link-btn:nth-child(1){ animation:dropIn .65s cubic-bezier(.34,1.4,.64,1) .05s both; }
+#links.show .link-btn:nth-child(2){ animation:dropIn .65s cubic-bezier(.34,1.4,.64,1) .18s both; }
+#links.show .link-btn:nth-child(3){ animation:dropIn .65s cubic-bezier(.34,1.4,.64,1) .31s both; }
+#links.show .link-btn:nth-child(4){ animation:dropIn .65s cubic-bezier(.34,1.4,.64,1) .44s both; }
+#links.show .link-btn:nth-child(5){ animation:dropIn .65s cubic-bezier(.34,1.4,.64,1) .57s both; }
 
-/* hover glow — desktop فقط */
+/* hover glow — desktop only */
 @media(hover:hover){
     .link-btn:hover{
         transform:translateY(-6px) scale(1.04);
@@ -159,11 +161,20 @@ body::after{
     .tiktok:hover{ box-shadow:0 8px 28px rgba(37,244,238,.35); }
     .whatsapp:hover{ box-shadow:0 8px 28px rgba(37,211,102,.35); }
     .kick:hover{ box-shadow:0 8px 28px rgba(83,252,31,.35); }
+    .discord:hover{ box-shadow:0 8px 28px rgba(114,137,218,.35); }
     .donate:hover{ box-shadow:0 8px 28px rgba(255,215,0,.35); }
+}
+
+/* tap glow — mobile */
+@media(hover:none){
+    .link-btn:active{
+        filter:brightness(1.2);
+    }
 }
 
 .tiktok i{ color:#25F4EE; }
 .whatsapp i{ color:#25D366; }
+.discord i{ color:#7289DA; }
 .donate i{ color:#FFD700; }
 </style>
 </head>
@@ -197,6 +208,11 @@ body::after{
             <span>KICK</span>
         </a>
 
+        <a class="link-btn discord" href="https://discord.gg/tcuxk4Evc" target="_blank">
+            <i class="fab fa-discord"></i>
+            <span>DISCORD</span>
+        </a>
+
         <a class="link-btn donate" href="https://ipn.eg/S/adhamsolo90/instapay/50rIUM">
             <i class="fas fa-hand-holding-dollar"></i>
             <span>DONATE</span>
@@ -208,9 +224,9 @@ body::after{
 <script>
 function showLinks(){
     document.getElementById("home").style.display="none";
-    const links = document.getElementById("links");
+    var links = document.getElementById("links");
     links.style.display="block";
-    setTimeout(()=>{ links.classList.add("show"); }, 30);
+    setTimeout(function(){ links.classList.add("show"); }, 30);
 }
 </script>
 
